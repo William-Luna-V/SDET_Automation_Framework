@@ -1,0 +1,24 @@
+name: E2E Regression Tests
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+        run:  |
+          pip install -r requirements.txt
+
+      - name: Ejecutar Tests en QA (Por Defecto)
+        env:
+          ENV: qa
+          BASE_URL: https://api.github.com/emojis
+          API_TOKEN: ${{ secrets.QA_API_TOKEN }}
+        run: python -m pytest -v -s
