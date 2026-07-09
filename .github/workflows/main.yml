@@ -3,6 +3,8 @@ name: E2E Regression Tests
 on: 
   push:
     branches: [main]
+    paths:
+      - '01-Gaps-Multienv/**' 
   pull_request:
 
 jobs:
