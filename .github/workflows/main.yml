@@ -3,10 +3,11 @@ name: E2E Regression Tests
 on: 
   push:
     branches: [main]
-    workflow_displatch:
     paths:
       - '01-Gaps-Multienv/**' 
   pull_request:
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
   test:
@@ -19,9 +20,11 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+        
+      - name: Instalar Dependencias
         run:  |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          if [ -f 01-Gaps-Multienv/requirements.txt ]; then pip install -r 01-Gaps-Multienv/requirements.txt; else pip install pytest python-dotenv; fi
 
       - name: Ejecutar Tests en QA (Por Defecto)
         env:

@@ -11,7 +11,7 @@ env_file = os.path.join(BASE_DIR,f".env.{target_env}")
 # 3. Cargar el archivo .env específico si existe
 if os.path.exists(env_file):
 	load_dotenv(dotenv_path=env_file)
-elif os.getenv("GITHUB ACTIONS") == "true":
+elif os.getenv("GITHUB_ACTIONS") == "true":
 	print("Corriendo en GitHub Actions")
 else:
 	raise FileNotFoundError(f"ERROR: El archivo de confguración {env_file} no existe.")
