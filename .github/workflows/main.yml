@@ -48,4 +48,5 @@ jobs:
           cache: maven
 
       - name: Compilar y probar con Maven
-        run: mvn clean test
+        run:  |
+          if [ -f 02-java-sdet-framework/pom.xml ]; then mvn -f 02-java-sdet-framework/pom.xml clean test; else mvn clean test; fi
